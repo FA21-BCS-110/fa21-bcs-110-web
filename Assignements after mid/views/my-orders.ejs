@@ -1,0 +1,20 @@
+<div class="orders-container">
+  <h1>My Orders</h1>
+  <% if (orders && orders.length) { %>
+    <% orders.forEach(function(order) { %>
+      <div class="order-block">
+        <h3>Order placed on <%= order.createdAt.toDateString() %></h3>
+        <ul>
+          <% order.items.forEach(function(item) { %>
+            <li>
+              <strong><%= item.productId ? item.productId.name : 'Product deleted' %></strong>
+              (Quantity: <%= item.quantity %>)
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>You have no orders yet.</p>
+  <% } %>
+</div> 

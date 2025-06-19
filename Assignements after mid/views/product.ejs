@@ -1,0 +1,16 @@
+<div class="product-detail-container" style="display: flex; gap: 40px; align-items: flex-start; margin: 40px;">
+  <div>
+    <img src="<%= product.image %>" alt="<%= product.name %>" style="max-width:300px; border:1px solid #eee;">
+  </div>
+  <div style="flex:1;">
+    <h1><%= product.name %></h1>
+    <p><strong>Price:</strong> £<%= product.price %></p>
+    <p><%= product.description %></p>
+    <form action="/cart/add/<%= product._id %>" method="POST" style="margin-top: 1em; display:inline-block;">
+      <label for="quantity">Quantity:</label>
+      <input type="number" name="quantity" id="quantity" value="1" min="1" style="width: 60px;">
+      <button type="submit" class="btn">Add to Cart</button>
+    </form>
+    <a href="/" class="btn" style="margin-left: 10px;">Back to Home</a>
+  </div>
+</div> 

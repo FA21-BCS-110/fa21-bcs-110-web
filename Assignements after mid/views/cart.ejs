@@ -1,0 +1,53 @@
+<div class="cart-container">
+  <h1>Your Cart</h1>
+  <% if (message) { %>
+    <div class="alert-message"><%= message %></div>
+  <% } %>
+  <% if (cart && cart.length) { %>
+    <div class="cart-table-wrapper">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.forEach(function(item) { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td>£<%= item.price %></td>
+              <td>
+                <form action="/cart/update/<%= item.productId %>" method="POST" class="cart-qty-form">
+                  <input type="number" name="quantity" value="<%= item.quantity %>" min="1" class="cart-qty-input">
+                  <button type="submit" class="cart-update-btn">Update</button>
+                </form>
+              </td>
+              <td>£<%= (item.price * item.quantity).toFixed(2) %></td>
+              <td>
+                <form action="/cart/remove/<%= item.productId %>" method="POST" class="cart-remove-form">
+                  <button type="submit" class="cart-remove-btn">Remove</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total:</span>
+        <span class="cart-total-value">£<%= total.toFixed(2) %></span>
+      </div>
+      <div class="cart-actions">
+        <a href="/checkout" class="checkout-btn">Proceed to Checkout</a>
+      </div>
+    </div>
+  <% } else { %>
+    <div class="cart-empty-message">
+      <p>Your cart is empty.</p>
+      <a href="/" class="continue-shopping-btn">Continue Shopping</a>
+    </div>
+  <% } %>
+</div> 

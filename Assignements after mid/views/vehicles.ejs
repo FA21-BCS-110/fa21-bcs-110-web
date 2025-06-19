@@ -1,0 +1,26 @@
+<div class="container mt-4">
+  <h1>Vehicles</h1>
+  <% if (vehicles.length === 0) { %>
+    <div class="alert alert-info">No vehicles available.</div>
+  <% } else { %>
+    <div class="row">
+      <% vehicles.forEach(vehicle => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <% if (vehicle.image) { %>
+              <img src="<%= vehicle.image %>" class="card-img-top" alt="<%= vehicle.name %>" style="max-height:200px;object-fit:cover;">
+            <% } %>
+            <div class="card-body">
+              <h5 class="card-title"><%= vehicle.name %></h5>
+              <p class="card-text">
+                <strong>Brand:</strong> <%= vehicle.brand %><br>
+                <strong>Type:</strong> <%= vehicle.type %><br>
+                <strong>Price:</strong> $<%= vehicle.price %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+</div> 

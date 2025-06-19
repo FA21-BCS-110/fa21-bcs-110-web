@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <title>SuperDry Fashion Page</title>
+    <link rel="stylesheet" href="/css/style.css">
+   
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="/images/superdry.jpg" alt="SuperDry Logo">
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/vehicles">Vehicles</a>
+            <a href="#">MEN</a>
+            <a href="#">WOMEN</a>
+            <a href="#">CULT</a>
+            <a href="#">COLLECTIONS</a>
+            <a href="#">SALE</a>
+        </div>
+
+        <div class="search-icons">
+            <div class="search-box">
+                <input type="text" placeholder="Search for ...">
+                <img src="/images/icons/search-interface-symbol.png" alt="Search Icon" class="icon">
+            </div>
+            <a href="/login"><img src="/images/icons/user.png" alt="User Icon" class="icon"></a>
+            <div class="cart">
+                <a href="/cart" style="display:inline-block; position:relative;">
+                    <img src="/images/icons/market.png" alt="Cart Icon" class="icon">
+                    <span class="cart-count"><%= typeof cart !== 'undefined' && cart.length ? cart.length : 0 %></span>
+                </a>
+            </div>
+        </div>
+        <% if (typeof user !== 'undefined' && user && !user.isAdmin) { %>
+            <form action="/logout" method="POST" style="display:inline; margin-left: 15px; float: right;">
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        <% } %>
+    </div>
+
+    <main>
+            <%- body %>
+    </main>
+
+    
+
+
+    <footer class="footer">
+        <section class="newsletter-signup">
+            <div class="newsletter-content">
+                <h2>Unlock Exclusive Access</h2>
+                <p>Get behind the scenes access to campaigns, collaborations, new products and sales.</p>
+            <div class="signup-form">
+                <form class="signup-form" aria-label="Newsletter Signup">
+                    <div class="email-input">
+                        <input type="email" placeholder="Enter email address" aria-label="Email address">
+                        <button type="submit" class="signup-btn">SIGN UP</button>
+                    </div>
+                    <div class="gender-options">
+                        <label>
+                            <input type="radio" name="gender" value="menswear" checked>
+                            Menswear
+                        </label>
+                        <label>
+                            <input type="radio" name="gender" value="womenswear">
+                            Womenswear
+                        </label>
+                    </div>
+                    <p class="privacy-note">
+                        By signing up you are agreeing to receive marketing communications from us.<br> For more information please see our <a href="#">Privacy Policy</a>.
+                    </p>
+                </form>
+            </div>
+            </div>
+        </section>
+    
+        <section class="footer-links">
+            <div class="footer-links-container">
+                <div class="footer-column">
+                    <h3>Online Shopping</h3>
+                    <ul>
+                        <li><a href="#">Buy from the brand</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="#">Delivery</a></li>
+                        <li><a href="#">Black Friday</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Customer Service</h3>
+                    <ul>
+                        <li><a href="#">Help & FAQs</a></li>
+                        <li><a href="#">Delivery Information</a></li>
+                        <li><a href="#">Returns Information</a></li>
+                        <li><a href="#">Returns Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Superdry The Brand</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Corporate</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Email Our Press Team</a></li>
+                        <li><a href="#">Sustainability</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Information</h3>
+                    <ul>
+                        <li><a href="#">Store Directory</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Consent</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Locate Store</h3>
+                    <p>The Store Locator is designed to help you find the closest store near you.</p>
+                    <a href="#" class="store-locator-btn">STORE LOCATOR</a>
+                </div>
+            </div>
+        </section>
+    
+        <section class="footer-bottom">
+            <div class="footer-bottom-container">
+                <div class="social-icons">
+                    <a href="#" aria-label="Instagram"><img src="/images/icons/insta.svg" alt="Instagram"></a>
+                    <a href="#" aria-label="Facebook"><img src="/images/icons/fb.svg" alt="Facebook"></a>
+                    <a href="#" aria-label="Twitter"><img src="/images/icons/twitter.svg" alt="Twitter"></a>
+                    <a href="#" aria-label="YouTube"><img src="/images/icons/yt.svg" alt="YouTube"></a>
+                </div>
+                
+            </div>
+        </section>
+    </footer>
+    
+        
+    </body>
+    </html>

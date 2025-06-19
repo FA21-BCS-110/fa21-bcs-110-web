@@ -1,0 +1,272 @@
+<% var products = typeof products !== 'undefined' ? products : []; %>
+
+<% if (typeof error !== 'undefined' && error) { %>
+  <div class="error-message" style="color: red; text-align: center; margin: 1em 0;">
+    <%= error %>
+  </div>
+<% } %>
+
+<section class="banner">
+    <div class="banner-content">
+        <h1>The Mid-Season Sale</h1>
+        <h2>Enjoy 50% OFF</h2>
+        <div class="banner-buttons">
+            <a href="#" class="btn">SHOP MEN'S</a>
+            <a href="#" class="btn">SHOP WOMEN'S</a>
+        </div>
+        <p class="disclaimer">*Online exclusive. Select lines. T&Cs apply.</p>
+    </div>
+</section>
+
+<section class="product-banner">
+    <div class="banner-container">
+
+        <div class="nav-buttons">
+            <button class="nav-btn active">WOMEN</button>
+            <button class="nav-btn">MEN</button>
+        </div>
+
+        <div class="arrow-buttons">
+            <button class="arrow-btn left-arrow"><img src="/images/icons/left-chevron.png" alt="Left Arrow"></button>
+            <button class="arrow-btn right-arrow"><img src="/images/icons/chevron.png" alt="Right Arrow"></button>
+        </div>
+
+        <div class="product-banner-content">
+            <div class="product-banner-text">
+                <h2>284 NEW ITEMS</h2>
+                <h1>New In</h1>
+                <p>New arrivals, now dropping, discover the latest launches</p>
+                <button class="shop-now-btn">SHOP NOW</button>
+            </div>
+
+            <div class="product-section">
+                <% if (products && products.length) { %>
+                    <% products.forEach(function(product) { %>
+                        <div class="product-item">
+                            <div class="product-image-wrapper">
+                                <img src="<%= product.image %>" alt="<%= product.name %>">
+                            </div>
+                            <div class="product-details">
+                                <p class="product-title"><%= product.name %></p>
+                                <p class="product-price">£<%= product.price %></p>
+                                <div class="product-actions">
+                                    <a href="/product/<%= product._id %>" class="btn">View</a>
+                                    <form action="/cart/add/<%= product._id %>" method="POST" style="display:inline; margin-left: 5px;">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <button type="submit" class="btn">Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No products available.</p>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cult-banner">
+    <div class="cult-banner-content">
+        <img src="/images/CULT_white.webp" alt="CULT Logo" class="cult-logo">
+        <button class="shop-now-btn">SHOP NOW</button>
+    </div>
+</section>
+
+<section class="robe-banner">
+    <div class="robe-banner-content">
+        <h1>THE SUPERDRY ROBE</h1>
+        <div class="robe-buttons">
+            <a href="#" class="btn">SHOP MEN'S</a>
+            <a href="#" class="btn">SHOP WOMEN'S</a>
+        </div>
+    </div>
+</section>
+<section class="fleece-collection-banner">
+    <div class="fleece-collection-content">
+        <h1>FLEECE COLLECTION</h1>
+        <div class="fleece-buttons">
+            <a href="#" class="btn">SHOP MEN'S</a>
+            <a href="#" class="btn">SHOP WOMEN'S</a>
+        </div>
+    </div>
+</section>
+
+<section class="explore-fleece">
+    <div class="fleece-container">
+        <h2>Explore Fleece</h2>
+
+        <nav class="fleece-nav-buttons">
+            <button class="nav-btn active">WOMEN</button>
+            <button class="nav-btn">MEN</button>
+        </nav>
+
+        <div class="fleece-wrapper">
+            <div class="fleece-products">
+                <div class="fleece-item">
+                    <img src="/images/Fleece1.jpg" alt="Estate Fleece Gilet">
+                    <p>ESTATE FLEECE GILET</p>
+                    <p class="fleece-price">£49.99</p>
+                    <div class="fleece-actions">
+                        <a href="#" class="btn">View</a>
+                        <form class="add-to-cart-fleece-form" action="/cart/add/fleece1" method="POST" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="fleece-item">
+                    <img src="/images/Fleece2.jpg" alt="Super Soft Jumper">
+                    <p>SUPER SOFT JUMPER</p>
+                    <p class="fleece-price">£39.99</p>
+                    <div class="fleece-actions">
+                        <a href="#" class="btn">View</a>
+                        <form class="add-to-cart-fleece-form" action="/cart/add/fleece2" method="POST" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="fleece-item">
+                    <img src="/images/Fleece3.jpg" alt="Workwear Fleece Hybrid Jacket">
+                    <p>WORKWEAR FLEECE HYBRID JACKET</p>
+                    <p class="fleece-price">£59.99</p>
+                    <div class="fleece-actions">
+                        <a href="#" class="btn">View</a>
+                        <form class="add-to-cart-fleece-form" action="/cart/add/fleece3" method="POST" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="fleece-item">
+                    <img src="/images/Fleece4.jpg" alt="Hooded Fleece Jacket">
+                    <p>HOODED FLEECE JACKET</p>
+                    <p class="fleece-price">£44.99</p>
+                    <div class="fleece-actions">
+                        <a href="#" class="btn">View</a>
+                        <form class="add-to-cart-fleece-form" action="/cart/add/fleece4" method="POST" style="display:inline; margin-left: 5px;">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+    </div>
+</section>
+<section class="split-banner">
+    <div class="banner-half banner-women">
+        <div class="banner-overlay">
+            <h2>SPRING EDIT</h2>
+            <a href="#" class="banner-btn">SHOP WOMEN'S</a>
+        </div>
+    </div>
+    <div class="banner-half banner-men">
+        <div class="banner-overlay">
+            <h2>NEW ARRIVALS</h2>
+            <a href="#" class="banner-btn">SHOP MEN'S</a>
+        </div>
+    </div>
+</section>
+
+<section class="most-wanted-banner">
+    <div class="most-wanted-content">
+        <h2>MOST WANTED</h2>
+        <div class="most-wanted-buttons">
+            <a href="#" class="banner-btn">SHOP MEN'S</a>
+            <a href="#" class="banner-btn">SHOP WOMEN'S</a>
+        </div>
+    </div>
+</section>
+
+<section class="recently-viewed">
+<div class="recently-viewed-container">
+    <h2>Recently Viewed</h2>
+    <div class="recently-viewed-products">
+        <div class="recently-viewed-item">
+            <div class="recently-viewed-image-wrapper">
+                <img src="/images/StudiosLongCoat.jpg" alt="Studios Long Liner Coat">
+            </div>
+            <div class="recently-viewed-details">
+                <p class="product-title">Studios Long Liner Coat</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="reviews">(8)</span>
+                </div>
+                <p class="more-colors">More Colours Available</p>
+                <p class="price">£99.99</p>
+            </div>
+        </div>
+        <div class="recently-viewed-item">
+            <div class="recently-viewed-image-wrapper">
+                <img src="/images/BrushedRibSlouchNeck.jpg" alt="Brushed Bib Slouch Neck Jumper">
+            </div>
+            <div class="recently-viewed-details">
+                <p class="product-title">Brushed Bib Slouch Neck Jumper</p>
+                <div class="rating">
+                    <span class="stars">★★★★☆</span>
+                </div>
+                <p class="more-colors">More Colours Available</p>
+                <div class="price-discount">
+                    <span class="original-price">£69.99</span>
+                    <span class="discounted-price">£48.99</span>
+                </div>
+                <p class="savings">You Save 30%</p>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<% /* Modal for Add to Cart confirmation */ %>
+<div id="addToCartModal" class="modal-overlay" style="display:none;">
+  <div class="modal-content">
+    <h2>Product added to cart!</h2>
+    <div class="modal-actions">
+      <button id="continueShoppingBtn" class="btn">Continue Shopping</button>
+      <a href="/cart" class="btn">Go to Cart</a>
+    </div>
+  </div>
+</div>
+<script>
+// Attach event listeners to all Add to Cart forms
+const addToCartForms = document.querySelectorAll('.product-section form[action^="/cart/add/"]');
+addToCartForms.forEach(form => {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const action = form.getAttribute('action');
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+    await fetch(action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    });
+    document.getElementById('addToCartModal').style.display = 'flex';
+  });
+});
+document.getElementById('continueShoppingBtn').onclick = function() {
+  document.getElementById('addToCartModal').style.display = 'none';
+};
+
+// Attach event listeners to all Add to Cart forms in Fleece section
+const fleeceCartForms = document.querySelectorAll('.add-to-cart-fleece-form');
+fleeceCartForms.forEach(form => {
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const action = form.getAttribute('action');
+    const formData = new FormData(form);
+    const data = new URLSearchParams(formData);
+    await fetch(action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: data
+    });
+    document.getElementById('addToCartModal').style.display = 'flex';
+  });
+});
+</script>

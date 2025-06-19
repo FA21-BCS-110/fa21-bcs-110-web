@@ -1,0 +1,352 @@
+<div class="admin-orders">
+    <div class="admin-header">
+        <h1>Manage Orders</h1>
+        <a href="/admin" class="btn btn-outline">Back to Dashboard</a>
+    </div>
+
+    <% if (typeof message !== 'undefined' && message) { %>
+        <div class="alert alert-success">
+            <%= message %>
+        </div>
+    <% } %>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+        <div class="alert alert-error">
+            <%= error %>
+        </div>
+    <% } %>
+
+    <div class="orders-container">
+        <% if (orders && orders.length > 0) { %>
+            <% orders.forEach(order => { %>
+                <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <h3>Order #<%= order._id.toString().slice(-6) %></h3>
+                            <p class="order-date">
+                                <strong>Date:</strong> <%= new Date(order.orderDate).toLocaleDateString() %>
+                            </p>
+                            <p class="order-status">
+                                <strong>Status:</strong> 
+                                <span class="status-badge status-<%= order.status.toLowerCase() %>">
+                                    <%= order.status %>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="order-total">
+                            <h4>Total: $<%= order.total.toFixed(2) %></h4>
+                        </div>
+                    </div>
+
+                    <div class="customer-info">
+                        <h4>Customer Information</h4>
+                        <div class="customer-details">
+                            <p><strong>Name:</strong> <%= order.name %></p>
+                            <p><strong>Phone:</strong> <%= order.phone %></p>
+                            <p><strong>Address:</strong> <%= order.address %></p>
+                            <% if (order.userId) { %>
+                                <p><strong>User Email:</strong> <%= order.userId.email %></p>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="order-items">
+                        <h4>Order Items</h4>
+                        <div class="items-list">
+                            <% order.items.forEach(item => { %>
+                                <div class="item">
+                                    <div class="item-details">
+                                        <h5><%= item.name %></h5>
+                                        <p>Quantity: <%= item.quantity %></p>
+                                        <p>Price: $<%= item.price.toFixed(2) %></p>
+                                        <p>Subtotal: $<%= (item.price * item.quantity).toFixed(2) %></p>
+                                    </div>
+                                </div>
+                            <% }); %>
+                        </div>
+                    </div>
+
+                    <div class="order-actions">
+                        <form method="POST" action="/admin/orders/update-status/<%= order._id %>" class="status-form">
+                            <select name="status" class="status-select">
+                                <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                <option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %>>Processing</option>
+                                <option value="Shipped" <%= order.status === 'Shipped' ? 'selected' : '' %>>Shipped</option>
+                                <option value="Delivered" <%= order.status === 'Delivered' ? 'selected' : '' %>>Delivered</option>
+                                <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Update Status</button>
+                        </form>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <div class="no-orders">
+                <h3>No Orders Found</h3>
+                <p>There are no orders in the system yet.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<style>
+.admin-orders {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 10px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border-left: 4px solid;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #28a745;
+    color: #155724;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    border-color: #dc3545;
+    color: #721c24;
+}
+
+.orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.order-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.order-info h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.order-date,
+.order-status {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.order-total h4 {
+    margin: 0;
+    color: #667eea;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-processing {
+    background: #cce5ff;
+    color: #004085;
+}
+
+.status-shipped {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.status-delivered {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.customer-info,
+.order-items {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.customer-info h4,
+.order-items h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.customer-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item {
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+}
+
+.item-details h5 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1em;
+}
+
+.item-details p {
+    margin: 3px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.order-actions {
+    padding: 20px;
+    background: #f8f9fa;
+}
+
+.status-form {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.status-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background: white;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-2px);
+}
+
+.no-orders {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.no-orders h3 {
+    margin: 0 0 15px 0;
+    color: #333;
+}
+
+.no-orders p {
+    color: #666;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .status-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .status-select {
+        width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+</style> 

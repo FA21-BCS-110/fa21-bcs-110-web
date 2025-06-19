@@ -1,0 +1,54 @@
+<div class="checkout-container">
+  <h1>Checkout</h1>
+  <% if (message) { %>
+    <div class="alert-message"><%= message %></div>
+  <% } %>
+  <% if (cart && cart.length) { %>
+    <div class="checkout-summary-wrapper">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% cart.forEach(function(item) { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td>£<%= item.price %></td>
+              <td><%= item.quantity %></td>
+              <td>£<%= (item.price * item.quantity).toFixed(2) %></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total:</span>
+        <span class="cart-total-value">£<%= total.toFixed(2) %></span>
+      </div>
+    </div>
+    <form action="/checkout" method="POST" class="checkout-form">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="text" name="phone" id="phone" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea name="address" id="address" required></textarea>
+      </div>
+      <button type="submit" class="checkout-btn">Pay Later with Cash</button>
+    </form>
+  <% } else { %>
+    <div class="cart-empty-message">
+      <p>Your cart is empty.</p>
+      <a href="/" class="continue-shopping-btn">Continue Shopping</a>
+    </div>
+  <% } %>
+</div> 
